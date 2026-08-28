@@ -1,57 +1,1626 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050b14">
 
-    <title>IMRAN WEB</title>
+<title>UniversalCalc Pro</title>
 
-    <link rel="stylesheet" href="style.css">
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#050b14;
+    --card:#0b1524;
+    --card2:#101d30;
+    --text:#f4f7fb;
+    --muted:#8fa3bc;
+    --border:#20334d;
+    --green:#35e3a1;
+    --blue:#4da3ff;
+    --purple:#b66cff;
+    --red:#ff637b;
+    --shadow:0 15px 45px rgba(0,0,0,.35);
+}
+
+body{
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,
+    "Segoe UI",sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            #123354 0,
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #071426,
+            #040911
+        );
+
+    color:var(--text);
+    min-height:100vh;
+    transition:.3s;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.container{
+    width:min(1200px,94%);
+    margin:auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    padding:18px 0;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:15px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:900;
+}
+
+.logo span{
+    color:var(--green);
+}
+
+.subtitle{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:3px;
+}
+
+.header-buttons{
+    display:flex;
+    gap:8px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:10px;
+    padding:9px 13px;
+
+    transition:.2s;
+}
+
+.btn:hover{
+    border-color:var(--green);
+    transform:translateY(-1px);
+}
+
+.primary{
+    background:var(--green);
+    color:#03130d;
+    border:none;
+    font-weight:800;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    border:1px solid var(--border);
+    border-radius:22px;
+
+    padding:30px;
+
+    background:
+        radial-gradient(
+            circle at 85% 10%,
+            #16446b,
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #0d1c30,
+            #09111d
+        );
+
+    box-shadow:var(--shadow);
+}
+
+.hero-label{
+    color:var(--green);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:1.5px;
+}
+
+/* NEW MAIN TITLE */
+
+.main-title{
+    font-size:clamp(34px,8vw,62px);
+    line-height:1;
+    margin:12px 0;
+
+    font-weight:950;
+    letter-spacing:-2px;
+
+    white-space:nowrap;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--green),
+            var(--blue),
+            var(--purple)
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.hero p{
+    color:var(--muted);
+    max-width:720px;
+    line-height:1.6;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search{
+    display:flex;
+    gap:8px;
+    margin-top:20px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input,
+select{
+    width:100%;
+
+    padding:11px;
+
+    background:#07101c;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    color:var(--text);
+
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:var(--green);
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories{
+    display:flex;
+    gap:8px;
+
+    overflow-x:auto;
+
+    padding:18px 0 13px;
+
+    scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.category{
+    white-space:nowrap;
+
+    background:var(--card);
+
+    color:var(--muted);
+
+    border:1px solid var(--border);
+
+    border-radius:999px;
+
+    padding:8px 13px;
+}
+
+.category.active{
+    color:var(--green);
+
+    border-color:var(--green);
+
+    background:#0b2b22;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.calculator-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(285px,1fr)
+        );
+
+    gap:15px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.calculator-card{
+    background:
+        linear-gradient(
+            180deg,
+            var(--card),
+            #08111d
+        );
+
+    border:1px solid var(--border);
+
+    border-radius:17px;
+
+    padding:17px;
+
+    box-shadow:var(--shadow);
+
+    transition:.2s;
+}
+
+.calculator-card:hover{
+    transform:translateY(-3px);
+    border-color:#315273;
+}
+
+.calculator-card h2{
+    font-size:18px;
+    margin:5px 0;
+}
+
+.tag{
+    color:var(--green);
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+}
+
+.description{
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-bottom:13px;
+}
+
+.fields{
+    display:grid;
+    gap:9px;
+}
+
+label{
+    color:var(--muted);
+
+    font-size:12px;
+
+    display:grid;
+
+    gap:5px;
+}
+
+.actions{
+    display:flex;
+
+    gap:8px;
+
+    margin-top:12px;
+}
+
+.result{
+    margin-top:12px;
+
+    background:#060d17;
+
+    border:1px solid var(--border);
+
+    border-radius:11px;
+
+    padding:12px;
+
+    line-height:1.7;
+
+    min-height:45px;
+
+    overflow-wrap:anywhere;
+}
+
+.result b{
+    color:var(--green);
+}
+
+.error{
+    color:var(--red);
+}
+
+/* =========================
+   HISTORY
+========================= */
+
+.history-title{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:25px 0 10px;
+}
+
+.history-title h2{
+    font-size:20px;
+}
+
+.history-list{
+    display:grid;
+    gap:8px;
+}
+
+.history-item{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    padding:11px;
+}
+
+.muted{
+    color:var(--muted);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+
+    color:var(--muted);
+
+    padding:30px 0;
+
+    font-size:12px;
+}
+
+/* =========================
+   LIGHT THEME
+========================= */
+
+body.light{
+    --bg:#eef4fa;
+    --card:#ffffff;
+    --card2:#f5f8fc;
+
+    --text:#152238;
+    --muted:#65758a;
+
+    --border:#d6dfeb;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f7fbff,
+            #eaf1f8
+        );
+}
+
+body.light .hero{
+    background:
+        radial-gradient(
+            circle at 85% 10%,
+            #d9efff,
+            transparent 35%
+        ),
+        #ffffff;
+}
+
+body.light .calculator-card{
+    background:#ffffff;
+}
+
+body.light .result{
+    background:#f5f8fc;
+}
+
+body.light input,
+body.light select{
+    background:#ffffff;
+}
+
+body.light .category.active{
+    background:#e8fff6;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .container{
+        width:94%;
+    }
+
+    header{
+        align-items:flex-start;
+    }
+
+    .hero{
+        padding:21px;
+    }
+
+    .main-title{
+        font-size:36px;
+    }
+
+    .search{
+        flex-direction:column;
+    }
+
+    .calculator-grid{
+        grid-template-columns:1fr;
+    }
+
+    .header-buttons .btn:first-child{
+        display:block;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <header>
-        <h1>IMRAN WEB</h1>
+<div class="container">
 
-        <p>Welcome to my website 🚀</p>
-    </header>
+<header>
 
-    <main>
+<div>
 
-        <section>
-            <h2>👋 Hello!</h2>
+<div class="logo">
+Universal<span>Calc</span> Pro
+</div>
 
-            <p>
-                Welcome to my first professional website.
-                यह वेबसाइट HTML, CSS और JavaScript से बनाई गई है।
-            </p>
-        </section>
+<div class="subtitle">
+ALL-IN-ONE SMART CALCULATOR
+</div>
 
-        <section>
-            <h2>🛠️ My Skills</h2>
+</div>
 
-            <p>HTML</p>
-            <p>CSS</p>
-            <p>JavaScript</p>
-            <p>Python</p>
-        </section>
+<div class="header-buttons">
 
-        <section>
-            <h2>📞 Contact</h2>
+<button
+class="btn"
+onclick="toggleTheme()">
 
-            <button onclick="showMessage()">
-                Click Me
-            </button>
-        </section>
+<span id="themeIcon">☀️</span>
+<span id="themeText">Light</span>
 
-    </main>
+</button>
 
-    <footer>
-        <p>© 2026 IMRAN WEB</p>
-    </footer>
+<button
+class="btn"
+onclick="scrollHistory()">
 
-    <script src="script.js"></script>
+📜 History
 
-</body>
-</html>
+</button>
+
+</div>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+<div class="hero-label">
+FAST • PRIVATE • MOBILE FIRST
+</div>
+
+<h1 class="main-title">
+UniversalCalc Pro
+</h1>
+
+<p>
+SIP, EMI, FD, RD, GST, percentage, age,
+scientific mathematics, unit conversion,
+statistics और everyday calculations.
+</p>
+
+<div class="search">
+
+<input
+id="searchInput"
+type="text"
+placeholder="Search: SIP, EMI, GST, BMI..."
+oninput="searchCalculators()"
+>
+
+<button
+class="btn"
+onclick="clearSearch()">
+
+Clear
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<div
+class="categories"
+id="categories">
+</div>
+
+
+<!-- CALCULATORS -->
+
+<section
+class="calculator-grid"
+id="calculatorGrid">
+</section>
+
+
+<!-- HISTORY -->
+
+<div
+class="history-title"
+id="historySection">
+
+<h2>
+Calculation History
+</h2>
+
+<button
+class="btn"
+onclick="clearHistory()">
+
+Clear All
+
+</button>
+
+</div>
+
+<div
+class="history-list"
+id="historyList">
+</div>
+
+
+<footer>
+
+UniversalCalc Pro •
+Financial and health calculations are estimates.
+
+</footer>
+
+</div>
+
+
+<script>
+
+/* =========================
+   GLOBAL
+========================= */
+
+let currentCategory="All";
+
+let history=
+JSON.parse(
+localStorage.getItem("calculatorHistory")||"[]"
+);
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function num(value){
+
+    const n=Number(value);
+
+    return Number.isFinite(n)
+        ? n
+        : 0;
+}
+
+
+function formatNumber(value){
+
+    if(typeof value!=="number")
+        return value;
+
+    return Number(
+        value.toFixed(6)
+    ).toLocaleString(
+        "en-IN"
+    );
+}
+
+
+function parseNumbers(value){
+
+    return String(value)
+        .split(",")
+        .map(Number)
+        .filter(
+            n=>Number.isFinite(n)
+        );
+}
+
+
+/* =========================
+   CALCULATORS
+========================= */
+
+const calculators=[
+
+{
+category:"Basic Math",
+name:"Addition",
+description:"दो numbers को जोड़ें",
+fields:["a","b"],
+calculate:v=>v.a+v.b
+},
+
+{
+category:"Basic Math",
+name:"Subtraction",
+description:"पहले number में से दूसरा घटाएँ",
+fields:["a","b"],
+calculate:v=>v.a-v.b
+},
+
+{
+category:"Basic Math",
+name:"Multiplication",
+description:"दो numbers को multiply करें",
+fields:["a","b"],
+calculate:v=>v.a*v.b
+},
+
+{
+category:"Basic Math",
+name:"Division",
+description:"Number division",
+fields:["a","b"],
+calculate:v=>
+v.b===0
+?"Cannot divide by zero"
+:v.a/v.b
+},
+
+{
+category:"Basic Math",
+name:"Percentage",
+description:"X% of Y निकालें",
+fields:["a","b"],
+calculate:v=>v.a*v.b/100
+},
+
+{
+category:"Basic Math",
+name:"Average",
+description:"Numbers का average",
+fields:["list"],
+calculate:v=>{
+
+const n=parseNumbers(v.list);
+
+if(!n.length)
+return "Invalid numbers";
+
+return n.reduce(
+(a,b)=>a+b,0
+)/n.length;
+
+}
+},
+
+{
+category:"Basic Math",
+name:"Power",
+description:"A की power B",
+fields:["a","b"],
+calculate:v=>Math.pow(v.a,v.b)
+},
+
+{
+category:"Basic Math",
+name:"Square Root",
+description:"Square root",
+fields:["a"],
+calculate:v=>
+v.a<0
+?"Invalid number"
+:Math.sqrt(v.a)
+},
+
+
+/* SCIENTIFIC */
+
+{
+category:"Scientific",
+name:"Scientific Calculator",
+description:"Math expression calculator",
+fields:["expression"],
+calculate:v=>{
+
+try{
+
+let exp=v.expression
+.replace(/\^/g,"**")
+.replace(/sqrt/gi,"Math.sqrt")
+.replace(/sin/gi,"Math.sin")
+.replace(/cos/gi,"Math.cos")
+.replace(/tan/gi,"Math.tan");
+
+if(!/^[0-9+\-*/().%\sA-Za-z_]+$/.test(exp))
+return "Invalid expression";
+
+return Function(
+'"use strict";return ('+
+exp+
+')'
+)();
+
+}catch(e){
+
+return "Invalid expression";
+
+}
+
+}
+},
+
+
+/* FINANCIAL */
+
+{
+category:"Financial",
+name:"SIP Calculator",
+description:"Monthly investment estimate",
+fields:["monthly","years","rate"],
+calculate:v=>{
+
+const P=v.monthly;
+const r=v.rate/100/12;
+const n=v.years*12;
+
+if(n<=0)
+return "Invalid years";
+
+if(r===0)
+return {
+"Invested":P*n,
+"Value":P*n
+};
+
+const value=
+P*
+(
+((1+r)**n-1)/r
+)*
+(1+r);
+
+return {
+"Invested":P*n,
+"Estimated Value":value,
+"Estimated Gain":value-P*n
+};
+
+}
+},
+
+{
+category:"Financial",
+name:"Lump Sum Calculator",
+description:"One-time investment estimate",
+fields:["principal","years","rate"],
+calculate:v=>{
+
+const value=
+v.principal*
+Math.pow(
+1+v.rate/100,
+v.years
+);
+
+return{
+"Invested":v.principal,
+"Value":value,
+"Gain":value-v.principal
+};
+
+}
+},
+
+{
+category:"Financial",
+name:"FD Calculator",
+description:"Fixed deposit estimate",
+fields:["principal","rate","years","frequency"],
+calculate:v=>{
+
+const n=v.frequency;
+
+const value=
+v.principal*
+Math.pow(
+1+v.rate/100/n,
+n*v.years
+);
+
+return{
+"Principal":v.principal,
+"Value":value,
+"Interest":value-v.principal
+};
+
+}
+},
+
+{
+category:"Financial",
+name:"RD Calculator",
+description:"Recurring deposit estimate",
+fields:["monthly","rate","years"],
+calculate:v=>{
+
+const months=v.years*12;
+const r=v.rate/100/12;
+
+const value=
+v.monthly*
+(
+((
+Math.pow(1+r,months)-1
+)/r)
+);
+
+return{
+"Deposited":v.monthly*months,
+"Estimated Value":value
+};
+
+}
+},
+
+{
+category:"Financial",
+name:"EMI Calculator",
+description:"Loan EMI calculation",
+fields:["principal","rate","months"],
+calculate:v=>{
+
+const r=v.rate/100/12;
+
+if(r===0)
+return v.principal/v.months;
+
+const emi=
+v.principal*
+r*
+Math.pow(1+r,v.months)/
+(
+Math.pow(1+r,v.months)-1
+);
+
+return{
+"Monthly EMI":emi,
+"Total Payment":emi*v.months,
+"Total Interest":
+emi*v.months-v.principal
+};
+
+}
+},
+
+{
+category:"Financial",
+name:"Simple Interest",
+description:"Simple interest",
+fields:["principal","rate","years"],
+calculate:v=>{
+
+const interest=
+v.principal*v.rate*v.years/100;
+
+return{
+"Interest":interest,
+"Total":v.principal+interest
+};
+
+}
+},
+
+{
+category:"Financial",
+name:"Compound Interest",
+description:"Compound interest",
+fields:["principal","rate","years","frequency"],
+calculate:v=>{
+
+const value=
+v.principal*
+Math.pow(
+1+v.rate/100/v.frequency,
+v.frequency*v.years
+);
+
+return{
+"Interest":value-v.principal,
+"Total":value
+};
+
+}
+},
+
+{
+category:"Financial",
+name:"CAGR Calculator",
+description:"Compound annual growth rate",
+fields:["startValue","endValue","years"],
+calculate:v=>{
+
+if(v.startValue<=0||v.years<=0)
+return "Invalid values";
+
+const cagr=
+(
+Math.pow(
+v.endValue/v.startValue,
+1/v.years
+)-1
+)*100;
+
+return cagr+" %";
+
+}
+},
+
+{
+category:"Financial",
+name:"Discount Calculator",
+description:"Discounted selling price",
+fields:["price","rate"],
+calculate:v=>{
+
+const discount=
+v.price*v.rate/100;
+
+return{
+"Discount":discount,
+"Final Price":v.price-discount
+};
+
+}
+},
+
+{
+category:"Financial",
+name:"Profit & Loss",
+description:"Profit or loss",
+fields:["cost","selling"],
+calculate:v=>{
+
+const difference=
+v.selling-v.cost;
+
+return{
+
+"Profit/Loss":
+difference,
+
+"Percentage":
+v.cost!==0
+?(difference/v.cost*100)
+:0
+
+};
+
+}
+},
+
+
+/* BUSINESS */
+
+{
+category:"Business",
+name:"GST Add",
+description:"Amount में GST जोड़ें",
+fields:["amount","rate"],
+calculate:v=>{
+
+const gst=
+v.amount*v.rate/100;
+
+return{
+"GST":gst,
+"Total":v.amount+gst
+};
+
+}
+},
+
+{
+category:"Business",
+name:"GST Remove",
+description:"GST-inclusive amount से GST निकालें",
+fields:["amount","rate"],
+calculate:v=>{
+
+const base=
+v.amount/(1+v.rate/100);
+
+return{
+"Base Amount":base,
+"GST":v.amount-base
+};
+
+}
+},
+
+{
+category:"Business",
+name:"Tip Calculator",
+description:"Tip और per-person amount",
+fields:["bill","rate","people"],
+calculate:v=>{
+
+if(v.people<=0)
+return "Invalid people count";
+
+const tip=
+v.bill*v.rate/100;
+
+return{
+"Tip":tip,
+"Total":v.bill+tip,
+"Per Person":
+(v.bill+tip)/v.people
+};
+
+}
+},
+
+{
+category:"Business",
+name:"Split Bill",
+description:"Bill को लोगों में divide करें",
+fields:["bill","people"],
+calculate:v=>
+v.people<=0
+?"Invalid people count"
+:v.bill/v.people
+},
+
+
+/* DATE */
+
+{
+category:"Date & Time",
+name:"Age Calculator",
+description:"Birth date से age",
+fields:["birthDate"],
+calculate:v=>{
+
+const birth=
+new Date(v.birthDate);
+
+if(isNaN(birth))
+return "Invalid date";
+
+const today=new Date();
+
+let age=
+today.getFullYear()-
+birth.getFullYear();
+
+const m=
+today.getMonth()-
+birth.getMonth();
+
+if(
+m<0 ||
+(
+m===0 &&
+today.getDate()<birth.getDate()
+)
+)
+age--;
+
+return age+" years";
+
+}
+},
+
+{
+category:"Date & Time",
+name:"Date Difference",
+description:"दो dates के बीच days",
+fields:["startDate","endDate"],
+calculate:v=>{
+
+const a=new Date(v.startDate);
+const b=new Date(v.endDate);
+
+if(isNaN(a)||isNaN(b))
+return "Invalid date";
+
+return Math.abs(
+Math.round(
+(b-a)/86400000
+)
+)+" days";
+
+}
+},
+
+
+/* CONVERTER */
+
+{
+category:"Converter",
+name:"Temperature",
+description:"Celsius / Fahrenheit / Kelvin",
+fields:[
+"value",
+"temperatureFrom",
+"temperatureTo"
+],
+calculate:v=>{
+
+let c;
+
+if(v.temperatureFrom==="C")
+c=v.value;
+
+if(v.temperatureFrom==="F")
+c=(v.value-32)*5/9;
+
+if(v.temperatureFrom==="K")
+c=v.value-273.15;
+
+if(v.temperatureTo==="C")
+return c;
+
+if(v.temperatureTo==="F")
+return c*9/5+32;
+
+return c+273.15;
+
+}
+},
+
+{
+category:"Converter",
+name:"Length",
+description:"Length conversion",
+fields:[
+"value",
+"lengthFrom",
+"lengthTo"
+],
+calculate:v=>
+v.value*
+lengthUnits[v.lengthFrom]/
+lengthUnits[v.lengthTo]
+},
+
+{
+category:"Converter",
+name:"Weight",
+description:"Weight conversion",
+fields:[
+"value",
+"weightFrom",
+"weightTo"
+],
+calculate:v=>
+v.value*
+weightUnits[v.weightFrom]/
+weightUnits[v.weightTo]
+},
+
+{
+category:"Converter",
+name:"Data Storage",
+description:"Byte / KB / MB / GB / TB",
+fields:[
+"value",
+"dataFrom",
+"dataTo"
+],
+calculate:v=>
+v.value*
+dataUnits[v.dataFrom]/
+dataUnits[v.dataTo]
+},
+
+
+/* HEALTH */
+
+{
+category:"Health",
+name:"BMI Calculator",
+description:"General BMI estimate",
+fields:[
+"weight",
+"height"
+],
+calculate:v=>{
+
+if(v.height<=0)
+return "Invalid height";
+
+const h=v.height/100;
+
+return{
+"BMI":
+v.weight/(h*h)
+};
+
+}
+},
+
+{
+category:"Health",
+name:"BMR Calculator",
+description:"General BMR estimate",
+fields:[
+"weight",
+"height",
+"age",
+"sex"
+],
+calculate:v=>{
+
+if(v.sex==="male"){
+
+return 10*v.weight+
+6.25*v.height-
+5*v.age+
+5;
+
+}
+
+return 10*v.weight+
+6.25*v.height-
+5*v.age-
+161;
+
+}
+},
+
+
+/* GEOMETRY */
+
+{
+category:"Geometry",
+name:"Circle",
+description:"Circle area और circumference",
+fields:["radius"],
+calculate:v=>{
+
+return{
+
+"Area":
+Math.PI*v.radius*v.radius,
+
+"Circumference":
+2*Math.PI*v.radius
+
+};
+
+}
+},
+
+{
+category:"Geometry",
+name:"Rectangle",
+description:"Rectangle area और perimeter",
+fields:[
+"length",
+"width"
+],
+calculate:v=>{
+
+return{
+
+"Area":
+v.length*v.width,
+
+"Perimeter":
+2*(v.length+v.width)
+
+};
+
+}
+},
+
+{
+category:"Geometry",
+name:"Triangle",
+description:"Triangle area",
+fields:[
+"base",
+"height"
+],
+calculate:v=>
+v.base*v.height/2
+},
+
+
+/* STATISTICS */
+
+{
+category:"Statistics",
+name:"Statistics",
+description:"Mean, median, min, max",
+fields:["list"],
+calculate:v=>{
+
+const n=parseNumbers(v.list);
+
+if(!n.length)
+return "Invalid numbers";
+
+const sorted=[...n].sort(
+(a,b)=>a-b
+);
+
+const mean=
+n.reduce((a,b)=>a+b,0)/n.length;
+
+const middle=
+Math.floor(sorted.length/2);
+
+const median=
+sorted.length%2
+?sorted[middle]
+:(sorted[middle-1]+sorted[middle])/2;
+
+return{
+
+"Mean":mean,
+"Median":median,
+"Minimum":Math.min(...n),
+"Maximum":Math.max(...n)
+
+};
+
+}
+},
+
+
+/* NUMBER TOOLS */
+
+{
+category:"Number Tools",
+name:"Prime Checker",
+description:"Check number prime है या नहीं",
+fields:["number"],
+calculate:v=>{
+
+const n=Math.floor(v.number);
+
+if(n<2)
+return "Not Prime";
+
+for(
+let i=2;
+i<=Math.sqrt(n);
+i++
+){
+
+if(n%i===0)
+return "Not Prime";
+
+}
+
+return "Prime";
+
+}
+},
+
+{
+category:"Number Tools",
+name:"GCD",
+description:"Greatest Common Divisor",
+fields:["a","b"],
+calculate:v=>{
+
+let a=Math.abs(
+Math.floor(v.a)
+);
+
+let b=Math.abs(
+Math.floor(v.b)
+);
+
+while(b){
+
+[a,b]=[
+b,
+a%b
+];
+
+}
+
+return a;
+
+}
+},
+
+{
+category:"Number Tools",
+name:"LCM",
+description:"Least Common Multiple",
+fields:["a","b"],
+calculate:v=>{
+
+const a=Math.abs(
+Math.floor(v.a)
+);
+
+const b=Math.abs(
+Math.floor(v.b)
+);
+
+if(a===0||b===0)
+return 0;
+
+let x=a;
+let y=b;
+
+while(y){
+
+[x,y]=[
+y,
+x%y
+];
+
+}
+
+return a/x*b;
+
+}
+},
+
+
+/* DIGITAL */
+
+{
+category:"Digital",
+name:"Download Time",
+description:"File size और internet speed",
+fields:[
+"fileSize",
+"speed"
+],
+calculate:v=>{
+
+if(v.speed<=0)
+return "Invalid speed";
+
+return{
+"Seconds":
+v.fileSize*8/v.speed,
+
+"Minutes":
+v.fileSize*8/v.speed/60
+
+};
+
+}
+}
+
+];
+
+
+/* =========================
+   UNITS
+========================= */
+
+const lengthUnits={
+
+mm:0.001,
+cm:0.01,
+meter:1,
+km:1000,
+inch:0.0254,
+feet:0.3048,
+yard:0.9144,
+mile:1609.344
+
+};
+
+const weightUnits={
+
+gram:0.001,
+kg:1,
+pound:0.45359237,
+ounce:0.0283495
+
+};
+
+const dataUnits={
+
+byte:1,
+KB:1024,
+MB:1024**2,
+GB:1024**3,
+TB:1024**4
+
+};
+
+
+/* =========================
+   LABELS
+========================= */
+
+const labels={
+
+a:"Number A",
+b:"Num

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050b14">
+<meta name="theme-color" content="#071426">
 
 <title>UniversalCalc Pro</title>
 
@@ -23,30 +23,30 @@
     --border:#20334d;
     --green:#35e3a1;
     --blue:#4da3ff;
-    --purple:#b66cff;
     --red:#ff637b;
     --shadow:0 15px 45px rgba(0,0,0,.35);
 }
 
 body{
-    font-family:system-ui,-apple-system,BlinkMacSystemFont,
-    "Segoe UI",sans-serif;
-
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     background:
-        radial-gradient(
-            circle at top right,
-            #123354 0,
-            transparent 35%
-        ),
-        linear-gradient(
-            180deg,
-            #071426,
-            #040911
-        );
-
+        radial-gradient(circle at top right,#123354 0,transparent 35%),
+        linear-gradient(180deg,#071426,#040911);
     color:var(--text);
     min-height:100vh;
     transition:.3s;
+}
+
+body.light{
+    --bg:#eef4fa;
+    --card:#ffffff;
+    --card2:#f5f8fc;
+    --text:#152238;
+    --muted:#65758a;
+    --border:#d6dfeb;
+    --shadow:0 10px 30px rgba(50,70,90,.12);
+
+    background:#eef4fa;
 }
 
 button,
@@ -64,22 +64,18 @@ button{
     margin:auto;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 header{
     padding:18px 0;
-
     display:flex;
     justify-content:space-between;
     align-items:center;
-
     gap:15px;
 }
 
 .logo{
-    font-size:24px;
+    font-size:25px;
     font-weight:900;
 }
 
@@ -91,6 +87,7 @@ header{
     color:var(--muted);
     font-size:11px;
     margin-top:3px;
+    letter-spacing:1px;
 }
 
 .header-buttons{
@@ -98,18 +95,14 @@ header{
     gap:8px;
 }
 
-/* =========================
-   BUTTON
-========================= */
+/* BUTTON */
 
 .btn{
     border:1px solid var(--border);
     background:var(--card);
     color:var(--text);
-
     border-radius:10px;
     padding:9px 13px;
-
     transition:.2s;
 }
 
@@ -125,29 +118,21 @@ header{
     font-weight:800;
 }
 
-/* =========================
-   HERO
-========================= */
+/* HERO */
 
 .hero{
     border:1px solid var(--border);
     border-radius:22px;
-
     padding:30px;
-
     background:
-        radial-gradient(
-            circle at 85% 10%,
-            #16446b,
-            transparent 32%
-        ),
-        linear-gradient(
-            135deg,
-            #0d1c30,
-            #09111d
-        );
-
+        radial-gradient(circle at 85% 10%,#16446b,transparent 32%),
+        linear-gradient(135deg,#0d1c30,#09111d);
     box-shadow:var(--shadow);
+    transition:.3s;
+}
+
+body.light .hero{
+    background:linear-gradient(135deg,#ffffff,#edf4fb);
 }
 
 .hero-label{
@@ -157,41 +142,29 @@ header{
     letter-spacing:1.5px;
 }
 
-/* NEW MAIN TITLE */
+/* ONE LINE TITLE */
 
-.main-title{
-    font-size:clamp(34px,8vw,62px);
-    line-height:1;
-    margin:12px 0;
-
-    font-weight:950;
-    letter-spacing:-2px;
-
-    white-space:nowrap;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--green),
-            var(--blue),
-            var(--purple)
-        );
-
+.hero h1{
+    font-size:clamp(24px,6vw,48px);
+    line-height:1.15;
+    margin:10px 0;
+    background:linear-gradient(
+        90deg,
+        var(--green),
+        var(--blue),
+        #b875ff
+    );
     -webkit-background-clip:text;
     background-clip:text;
-
     color:transparent;
 }
 
 .hero p{
     color:var(--muted);
-    max-width:720px;
-    line-height:1.6;
+    max-width:800px;
 }
 
-/* =========================
-   SEARCH
-========================= */
+/* SEARCH */
 
 .search{
     display:flex;
@@ -199,25 +172,20 @@ header{
     margin-top:20px;
 }
 
-/* =========================
-   INPUTS
-========================= */
-
 input,
 select{
     width:100%;
-
     padding:11px;
-
     background:#07101c;
-
     border:1px solid var(--border);
-
     border-radius:10px;
-
     color:var(--text);
-
     outline:none;
+}
+
+body.light input,
+body.light select{
+    background:#fff;
 }
 
 input:focus,
@@ -225,18 +193,13 @@ select:focus{
     border-color:var(--green);
 }
 
-/* =========================
-   CATEGORIES
-========================= */
+/* CATEGORIES */
 
 .categories{
     display:flex;
     gap:8px;
-
     overflow-x:auto;
-
     padding:18px 0 13px;
-
     scrollbar-width:none;
 }
 
@@ -246,68 +209,45 @@ select:focus{
 
 .category{
     white-space:nowrap;
-
     background:var(--card);
-
     color:var(--muted);
-
     border:1px solid var(--border);
-
     border-radius:999px;
-
     padding:8px 13px;
 }
 
 .category.active{
     color:var(--green);
-
     border-color:var(--green);
-
     background:#0b2b22;
 }
 
-/* =========================
-   GRID
-========================= */
+/* GRID */
 
 .calculator-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(285px,1fr)
-        );
-
+    grid-template-columns:repeat(auto-fit,minmax(285px,1fr));
     gap:15px;
 }
 
-/* =========================
-   CARD
-========================= */
+/* CARD */
 
 .calculator-card{
-    background:
-        linear-gradient(
-            180deg,
-            var(--card),
-            #08111d
-        );
-
+    background:linear-gradient(180deg,var(--card),#08111d);
     border:1px solid var(--border);
-
     border-radius:17px;
-
     padding:17px;
-
     box-shadow:var(--shadow);
+    transition:.25s;
+}
 
-    transition:.2s;
+body.light .calculator-card{
+    background:#fff;
 }
 
 .calculator-card:hover{
-    transform:translateY(-3px);
-    border-color:#315273;
+    transform:translateY(-2px);
+    border-color:#315274;
 }
 
 .calculator-card h2{
@@ -317,21 +257,15 @@ select:focus{
 
 .tag{
     color:var(--green);
-
     font-size:10px;
-
     font-weight:800;
-
     letter-spacing:1px;
-
     text-transform:uppercase;
 }
 
 .description{
     color:var(--muted);
-
     font-size:13px;
-
     margin-bottom:13px;
 }
 
@@ -342,38 +276,30 @@ select:focus{
 
 label{
     color:var(--muted);
-
     font-size:12px;
-
     display:grid;
-
     gap:5px;
 }
 
 .actions{
     display:flex;
-
     gap:8px;
-
     margin-top:12px;
 }
 
 .result{
     margin-top:12px;
-
     background:#060d17;
-
     border:1px solid var(--border);
-
     border-radius:11px;
-
     padding:12px;
-
     line-height:1.7;
-
     min-height:45px;
-
     overflow-wrap:anywhere;
+}
+
+body.light .result{
+    background:#f5f8fc;
 }
 
 .result b{
@@ -384,18 +310,13 @@ label{
     color:var(--red);
 }
 
-/* =========================
-   HISTORY
-========================= */
+/* HISTORY */
 
 .history-title{
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
-    margin:25px 0 10px;
+    margin:28px 0 10px;
 }
 
 .history-title h2{
@@ -409,11 +330,8 @@ label{
 
 .history-item{
     background:var(--card);
-
     border:1px solid var(--border);
-
     border-radius:10px;
-
     padding:11px;
 }
 
@@ -421,72 +339,25 @@ label{
     color:var(--muted);
 }
 
-/* =========================
-   FOOTER
-========================= */
-
 footer{
     text-align:center;
-
     color:var(--muted);
-
     padding:30px 0;
-
     font-size:12px;
 }
 
-/* =========================
-   LIGHT THEME
-========================= */
+/* EMPTY */
 
-body.light{
-    --bg:#eef4fa;
-    --card:#ffffff;
-    --card2:#f5f8fc;
-
-    --text:#152238;
-    --muted:#65758a;
-
-    --border:#d6dfeb;
-
-    background:
-        linear-gradient(
-            180deg,
-            #f7fbff,
-            #eaf1f8
-        );
+.empty{
+    grid-column:1/-1;
+    text-align:center;
+    padding:35px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    color:var(--muted);
 }
 
-body.light .hero{
-    background:
-        radial-gradient(
-            circle at 85% 10%,
-            #d9efff,
-            transparent 35%
-        ),
-        #ffffff;
-}
-
-body.light .calculator-card{
-    background:#ffffff;
-}
-
-body.light .result{
-    background:#f5f8fc;
-}
-
-body.light input,
-body.light select{
-    background:#ffffff;
-}
-
-body.light .category.active{
-    background:#e8fff6;
-}
-
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:600px){
 
@@ -502,8 +373,8 @@ body.light .category.active{
         padding:21px;
     }
 
-    .main-title{
-        font-size:36px;
+    .hero h1{
+        font-size:28px;
     }
 
     .search{
@@ -515,7 +386,7 @@ body.light .category.active{
     }
 
     .header-buttons .btn:first-child{
-        display:block;
+        display:none;
     }
 }
 </style>
@@ -527,131 +398,102 @@ body.light .category.active{
 
 <header>
 
-<div>
+    <div>
+        <div class="logo">
+            Universal<span>Calc</span> Pro
+        </div>
 
-<div class="logo">
-Universal<span>Calc</span> Pro
-</div>
+        <div class="subtitle">
+            ALL-IN-ONE SMART CALCULATOR
+        </div>
+    </div>
 
-<div class="subtitle">
-ALL-IN-ONE SMART CALCULATOR
-</div>
+    <div class="header-buttons">
 
-</div>
+        <button class="btn" onclick="toggleTheme()" id="themeBtn">
+            ☀️ Light
+        </button>
 
-<div class="header-buttons">
+        <button class="btn" onclick="scrollHistory()">
+            History
+        </button>
 
-<button
-class="btn"
-onclick="toggleTheme()">
-
-<span id="themeIcon">☀️</span>
-<span id="themeText">Light</span>
-
-</button>
-
-<button
-class="btn"
-onclick="scrollHistory()">
-
-📜 History
-
-</button>
-
-</div>
+    </div>
 
 </header>
 
 
-<!-- =========================
-     HERO
-========================= -->
+<!-- HERO -->
 
 <section class="hero">
 
-<div class="hero-label">
-FAST • PRIVATE • MOBILE FIRST
-</div>
+    <div class="hero-label">
+        FAST • PRIVATE • MOBILE FIRST
+    </div>
 
-<h1 class="main-title">
-UniversalCalc Pro
-</h1>
+    <h1>
+        All Calculations In One Place
+    </h1>
 
-<p>
-SIP, EMI, FD, RD, GST, percentage, age,
-scientific mathematics, unit conversion,
-statistics और everyday calculations.
-</p>
+    <p>
+        SIP, EMI, FD, RD, GST, percentage, age,
+        scientific mathematics, unit conversion,
+        statistics और everyday calculations.
+    </p>
 
-<div class="search">
+    <div class="search">
 
-<input
-id="searchInput"
-type="text"
-placeholder="Search: SIP, EMI, GST, BMI..."
-oninput="searchCalculators()"
->
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Search: SIP, EMI, GST, BMI..."
+            oninput="searchCalculators()"
+        >
 
-<button
-class="btn"
-onclick="clearSearch()">
+        <button class="btn" onclick="clearSearch()">
+            Clear
+        </button>
 
-Clear
-
-</button>
-
-</div>
+    </div>
 
 </section>
 
 
 <!-- CATEGORIES -->
 
-<div
-class="categories"
-id="categories">
-</div>
+<div class="categories" id="categories"></div>
 
 
 <!-- CALCULATORS -->
 
 <section
-class="calculator-grid"
-id="calculatorGrid">
+    class="calculator-grid"
+    id="calculatorGrid">
 </section>
 
 
 <!-- HISTORY -->
 
-<div
-class="history-title"
-id="historySection">
+<div class="history-title" id="historySection">
 
-<h2>
-Calculation History
-</h2>
+    <h2>Calculation History</h2>
 
-<button
-class="btn"
-onclick="clearHistory()">
-
-Clear All
-
-</button>
+    <button
+        class="btn"
+        onclick="clearHistory()">
+        Clear All
+    </button>
 
 </div>
 
 <div
-class="history-list"
-id="historyList">
+    class="history-list"
+    id="historyList">
 </div>
 
 
 <footer>
-
-UniversalCalc Pro •
-Financial and health calculations are estimates.
-
+    UniversalCalc Pro • Financial and health calculations are estimates.
 </footer>
 
 </div>
@@ -659,931 +501,572 @@ Financial and health calculations are estimates.
 
 <script>
 
-/* =========================
+/* ==========================================
    GLOBAL
-========================= */
+========================================== */
 
-let currentCategory="All";
+let currentCategory = "All";
 
-let history=
-JSON.parse(
-localStorage.getItem("calculatorHistory")||"[]"
+let history = JSON.parse(
+    localStorage.getItem("calculatorHistory") || "[]"
 );
 
 
-/* =========================
-   HELPERS
-========================= */
+/* ==========================================
+   CALCULATOR DATABASE
+========================================== */
 
-function num(value){
+const calculators = [
 
-    const n=Number(value);
-
-    return Number.isFinite(n)
-        ? n
-        : 0;
-}
-
-
-function formatNumber(value){
-
-    if(typeof value!=="number")
-        return value;
-
-    return Number(
-        value.toFixed(6)
-    ).toLocaleString(
-        "en-IN"
-    );
-}
-
-
-function parseNumbers(value){
-
-    return String(value)
-        .split(",")
-        .map(Number)
-        .filter(
-            n=>Number.isFinite(n)
-        );
-}
-
-
-/* =========================
-   CALCULATORS
-========================= */
-
-const calculators=[
+/* BASIC MATH */
 
 {
-category:"Basic Math",
-name:"Addition",
-description:"दो numbers को जोड़ें",
-fields:["a","b"],
-calculate:v=>v.a+v.b
+    category:"Basic Math",
+    name:"Addition",
+    description:"दो numbers को जोड़ें",
+    fields:["a","b"],
+    calculate:v => v.a + v.b
 },
 
 {
-category:"Basic Math",
-name:"Subtraction",
-description:"पहले number में से दूसरा घटाएँ",
-fields:["a","b"],
-calculate:v=>v.a-v.b
+    category:"Basic Math",
+    name:"Subtraction",
+    description:"पहले number में से दूसरा घटाएँ",
+    fields:["a","b"],
+    calculate:v => v.a - v.b
 },
 
 {
-category:"Basic Math",
-name:"Multiplication",
-description:"दो numbers को multiply करें",
-fields:["a","b"],
-calculate:v=>v.a*v.b
+    category:"Basic Math",
+    name:"Multiplication",
+    description:"दो numbers को multiply करें",
+    fields:["a","b"],
+    calculate:v => v.a * v.b
 },
 
 {
-category:"Basic Math",
-name:"Division",
-description:"Number division",
-fields:["a","b"],
-calculate:v=>
-v.b===0
-?"Cannot divide by zero"
-:v.a/v.b
+    category:"Basic Math",
+    name:"Division",
+    description:"दो numbers को divide करें",
+    fields:["a","b"],
+    calculate:v =>
+        v.b === 0
+        ? "Cannot divide by zero"
+        : v.a / v.b
 },
 
 {
-category:"Basic Math",
-name:"Percentage",
-description:"X% of Y निकालें",
-fields:["a","b"],
-calculate:v=>v.a*v.b/100
+    category:"Basic Math",
+    name:"Percentage",
+    description:"X% of Y निकालें",
+    fields:["a","b"],
+    calculate:v => v.a * v.b / 100
 },
 
 {
-category:"Basic Math",
-name:"Average",
-description:"Numbers का average",
-fields:["list"],
-calculate:v=>{
+    category:"Basic Math",
+    name:"Average",
+    description:"Numbers का average निकालें",
+    fields:["list"],
+    calculate:v => {
 
-const n=parseNumbers(v.list);
+        const numbers = parseNumbers(v.list);
 
-if(!n.length)
-return "Invalid numbers";
+        if(!numbers.length)
+            return "Invalid numbers";
 
-return n.reduce(
-(a,b)=>a+b,0
-)/n.length;
-
-}
+        return numbers.reduce(
+            (a,b)=>a+b,
+            0
+        ) / numbers.length;
+    }
 },
 
 {
-category:"Basic Math",
-name:"Power",
-description:"A की power B",
-fields:["a","b"],
-calculate:v=>Math.pow(v.a,v.b)
+    category:"Basic Math",
+    name:"Power",
+    description:"A की power B",
+    fields:["a","b"],
+    calculate:v => Math.pow(v.a,v.b)
 },
 
 {
-category:"Basic Math",
-name:"Square Root",
-description:"Square root",
-fields:["a"],
-calculate:v=>
-v.a<0
-?"Invalid number"
-:Math.sqrt(v.a)
+    category:"Basic Math",
+    name:"Square Root",
+    description:"Number का square root",
+    fields:["a"],
+    calculate:v =>
+        v.a < 0
+        ? "Invalid number"
+        : Math.sqrt(v.a)
 },
 
 
 /* SCIENTIFIC */
 
 {
-category:"Scientific",
-name:"Scientific Calculator",
-description:"Math expression calculator",
-fields:["expression"],
-calculate:v=>{
-
-try{
-
-let exp=v.expression
-.replace(/\^/g,"**")
-.replace(/sqrt/gi,"Math.sqrt")
-.replace(/sin/gi,"Math.sin")
-.replace(/cos/gi,"Math.cos")
-.replace(/tan/gi,"Math.tan");
-
-if(!/^[0-9+\-*/().%\sA-Za-z_]+$/.test(exp))
-return "Invalid expression";
-
-return Function(
-'"use strict";return ('+
-exp+
-')'
-)();
-
-}catch(e){
-
-return "Invalid expression";
-
-}
-
-}
+    category:"Scientific",
+    name:"Scientific Calculator",
+    description:"Basic scientific expression",
+    fields:["expression"],
+    calculate:v => calculateExpression(v.expression)
 },
 
 
 /* FINANCIAL */
 
 {
-category:"Financial",
-name:"SIP Calculator",
-description:"Monthly investment estimate",
-fields:["monthly","years","rate"],
-calculate:v=>{
-
-const P=v.monthly;
-const r=v.rate/100/12;
-const n=v.years*12;
-
-if(n<=0)
-return "Invalid years";
-
-if(r===0)
-return {
-"Invested":P*n,
-"Value":P*n
-};
-
-const value=
-P*
-(
-((1+r)**n-1)/r
-)*
-(1+r);
-
-return {
-"Invested":P*n,
-"Estimated Value":value,
-"Estimated Gain":value-P*n
-};
-
-}
+    category:"Financial",
+    name:"SIP Calculator",
+    description:"Monthly investment का estimated future value",
+    fields:["monthly","years","rate"],
+    calculate:sipCalculator
 },
 
 {
-category:"Financial",
-name:"Lump Sum Calculator",
-description:"One-time investment estimate",
-fields:["principal","years","rate"],
-calculate:v=>{
-
-const value=
-v.principal*
-Math.pow(
-1+v.rate/100,
-v.years
-);
-
-return{
-"Invested":v.principal,
-"Value":value,
-"Gain":value-v.principal
-};
-
-}
+    category:"Financial",
+    name:"Lump Sum Calculator",
+    description:"One-time investment estimate",
+    fields:["principal","years","rate"],
+    calculate:lumpSum
 },
 
 {
-category:"Financial",
-name:"FD Calculator",
-description:"Fixed deposit estimate",
-fields:["principal","rate","years","frequency"],
-calculate:v=>{
-
-const n=v.frequency;
-
-const value=
-v.principal*
-Math.pow(
-1+v.rate/100/n,
-n*v.years
-);
-
-return{
-"Principal":v.principal,
-"Value":value,
-"Interest":value-v.principal
-};
-
-}
+    category:"Financial",
+    name:"FD Calculator",
+    description:"Fixed Deposit estimate",
+    fields:["principal","rate","years","frequency"],
+    calculate:fdCalculator
 },
 
 {
-category:"Financial",
-name:"RD Calculator",
-description:"Recurring deposit estimate",
-fields:["monthly","rate","years"],
-calculate:v=>{
-
-const months=v.years*12;
-const r=v.rate/100/12;
-
-const value=
-v.monthly*
-(
-((
-Math.pow(1+r,months)-1
-)/r)
-);
-
-return{
-"Deposited":v.monthly*months,
-"Estimated Value":value
-};
-
-}
+    category:"Financial",
+    name:"RD Calculator",
+    description:"Recurring Deposit estimate",
+    fields:["monthly","rate","years"],
+    calculate:rdCalculator
 },
 
 {
-category:"Financial",
-name:"EMI Calculator",
-description:"Loan EMI calculation",
-fields:["principal","rate","months"],
-calculate:v=>{
-
-const r=v.rate/100/12;
-
-if(r===0)
-return v.principal/v.months;
-
-const emi=
-v.principal*
-r*
-Math.pow(1+r,v.months)/
-(
-Math.pow(1+r,v.months)-1
-);
-
-return{
-"Monthly EMI":emi,
-"Total Payment":emi*v.months,
-"Total Interest":
-emi*v.months-v.principal
-};
-
-}
+    category:"Financial",
+    name:"EMI Calculator",
+    description:"Loan EMI calculation",
+    fields:["principal","rate","months"],
+    calculate:emiCalculator
 },
 
 {
-category:"Financial",
-name:"Simple Interest",
-description:"Simple interest",
-fields:["principal","rate","years"],
-calculate:v=>{
-
-const interest=
-v.principal*v.rate*v.years/100;
-
-return{
-"Interest":interest,
-"Total":v.principal+interest
-};
-
-}
+    category:"Financial",
+    name:"Simple Interest",
+    description:"Simple interest calculation",
+    fields:["principal","rate","years"],
+    calculate:simpleInterest
 },
 
 {
-category:"Financial",
-name:"Compound Interest",
-description:"Compound interest",
-fields:["principal","rate","years","frequency"],
-calculate:v=>{
-
-const value=
-v.principal*
-Math.pow(
-1+v.rate/100/v.frequency,
-v.frequency*v.years
-);
-
-return{
-"Interest":value-v.principal,
-"Total":value
-};
-
-}
+    category:"Financial",
+    name:"Compound Interest",
+    description:"Compound interest calculation",
+    fields:["principal","rate","years","frequency"],
+    calculate:compoundInterest
 },
 
 {
-category:"Financial",
-name:"CAGR Calculator",
-description:"Compound annual growth rate",
-fields:["startValue","endValue","years"],
-calculate:v=>{
-
-if(v.startValue<=0||v.years<=0)
-return "Invalid values";
-
-const cagr=
-(
-Math.pow(
-v.endValue/v.startValue,
-1/v.years
-)-1
-)*100;
-
-return cagr+" %";
-
-}
+    category:"Financial",
+    name:"CAGR Calculator",
+    description:"Compound Annual Growth Rate",
+    fields:["startValue","endValue","years"],
+    calculate:cagr
 },
 
 {
-category:"Financial",
-name:"Discount Calculator",
-description:"Discounted selling price",
-fields:["price","rate"],
-calculate:v=>{
-
-const discount=
-v.price*v.rate/100;
-
-return{
-"Discount":discount,
-"Final Price":v.price-discount
-};
-
-}
+    category:"Financial",
+    name:"Discount Calculator",
+    description:"Discount के बाद selling price",
+    fields:["price","rate"],
+    calculate:discount
 },
 
 {
-category:"Financial",
-name:"Profit & Loss",
-description:"Profit or loss",
-fields:["cost","selling"],
-calculate:v=>{
-
-const difference=
-v.selling-v.cost;
-
-return{
-
-"Profit/Loss":
-difference,
-
-"Percentage":
-v.cost!==0
-?(difference/v.cost*100)
-:0
-
-};
-
-}
+    category:"Financial",
+    name:"Profit & Loss",
+    description:"Profit या Loss calculation",
+    fields:["cost","selling"],
+    calculate:profitLoss
 },
 
 
 /* BUSINESS */
 
 {
-category:"Business",
-name:"GST Add",
-description:"Amount में GST जोड़ें",
-fields:["amount","rate"],
-calculate:v=>{
+    category:"Business",
+    name:"GST Add",
+    description:"Amount में GST जोड़ें",
+    fields:["amount","rate"],
+    calculate:v => {
 
-const gst=
-v.amount*v.rate/100;
+        const gst =
+            v.amount * v.rate / 100;
 
-return{
-"GST":gst,
-"Total":v.amount+gst
-};
-
-}
+        return {
+            "GST":gst,
+            "Total":v.amount + gst
+        };
+    }
 },
 
 {
-category:"Business",
-name:"GST Remove",
-description:"GST-inclusive amount से GST निकालें",
-fields:["amount","rate"],
-calculate:v=>{
+    category:"Business",
+    name:"GST Remove",
+    description:"GST-inclusive amount से GST निकालें",
+    fields:["amount","rate"],
+    calculate:v => {
 
-const base=
-v.amount/(1+v.rate/100);
+        const base =
+            v.amount / (1 + v.rate/100);
 
-return{
-"Base Amount":base,
-"GST":v.amount-base
-};
-
-}
+        return {
+            "Base Amount":base,
+            "GST":v.amount-base
+        };
+    }
 },
 
 {
-category:"Business",
-name:"Tip Calculator",
-description:"Tip और per-person amount",
-fields:["bill","rate","people"],
-calculate:v=>{
+    category:"Business",
+    name:"Tip Calculator",
+    description:"Tip और per-person amount",
+    fields:["bill","rate","people"],
+    calculate:v => {
 
-if(v.people<=0)
-return "Invalid people count";
+        if(v.people <= 0)
+            return "Invalid people count";
 
-const tip=
-v.bill*v.rate/100;
+        const tip =
+            v.bill*v.rate/100;
 
-return{
-"Tip":tip,
-"Total":v.bill+tip,
-"Per Person":
-(v.bill+tip)/v.people
-};
-
-}
+        return {
+            "Tip":tip,
+            "Total":v.bill+tip,
+            "Per Person":
+                (v.bill+tip)/v.people
+        };
+    }
 },
 
 {
-category:"Business",
-name:"Split Bill",
-description:"Bill को लोगों में divide करें",
-fields:["bill","people"],
-calculate:v=>
-v.people<=0
-?"Invalid people count"
-:v.bill/v.people
+    category:"Business",
+    name:"Split Bill",
+    description:"Bill को लोगों में divide करें",
+    fields:["bill","people"],
+    calculate:v =>
+        v.people <= 0
+        ? "Invalid people count"
+        : v.bill/v.people
 },
 
 
 /* DATE */
 
 {
-category:"Date & Time",
-name:"Age Calculator",
-description:"Birth date से age",
-fields:["birthDate"],
-calculate:v=>{
-
-const birth=
-new Date(v.birthDate);
-
-if(isNaN(birth))
-return "Invalid date";
-
-const today=new Date();
-
-let age=
-today.getFullYear()-
-birth.getFullYear();
-
-const m=
-today.getMonth()-
-birth.getMonth();
-
-if(
-m<0 ||
-(
-m===0 &&
-today.getDate()<birth.getDate()
-)
-)
-age--;
-
-return age+" years";
-
-}
+    category:"Date & Time",
+    name:"Age Calculator",
+    description:"Birth date से current age",
+    fields:["birthDate"],
+    calculate:ageCalculator
 },
 
 {
-category:"Date & Time",
-name:"Date Difference",
-description:"दो dates के बीच days",
-fields:["startDate","endDate"],
-calculate:v=>{
+    category:"Date & Time",
+    name:"Date Difference",
+    description:"दो dates के बीच days",
+    fields:["startDate","endDate"],
+    calculate:v => {
 
-const a=new Date(v.startDate);
-const b=new Date(v.endDate);
+        const a = new Date(v.startDate);
+        const b = new Date(v.endDate);
 
-if(isNaN(a)||isNaN(b))
-return "Invalid date";
+        if(isNaN(a) || isNaN(b))
+            return "Invalid date";
 
-return Math.abs(
-Math.round(
-(b-a)/86400000
-)
-)+" days";
-
-}
+        return Math.abs(
+            Math.round((b-a)/86400000)
+        ) + " days";
+    }
 },
 
 
 /* CONVERTER */
 
 {
-category:"Converter",
-name:"Temperature",
-description:"Celsius / Fahrenheit / Kelvin",
-fields:[
-"value",
-"temperatureFrom",
-"temperatureTo"
-],
-calculate:v=>{
-
-let c;
-
-if(v.temperatureFrom==="C")
-c=v.value;
-
-if(v.temperatureFrom==="F")
-c=(v.value-32)*5/9;
-
-if(v.temperatureFrom==="K")
-c=v.value-273.15;
-
-if(v.temperatureTo==="C")
-return c;
-
-if(v.temperatureTo==="F")
-return c*9/5+32;
-
-return c+273.15;
-
-}
+    category:"Converter",
+    name:"Temperature",
+    description:"Celsius, Fahrenheit और Kelvin",
+    fields:[
+        "value",
+        "temperatureFrom",
+        "temperatureTo"
+    ],
+    calculate:temperature
 },
 
 {
-category:"Converter",
-name:"Length",
-description:"Length conversion",
-fields:[
-"value",
-"lengthFrom",
-"lengthTo"
-],
-calculate:v=>
-v.value*
-lengthUnits[v.lengthFrom]/
-lengthUnits[v.lengthTo]
+    category:"Converter",
+    name:"Length",
+    description:"Length conversion",
+    fields:[
+        "value",
+        "lengthFrom",
+        "lengthTo"
+    ],
+    calculate:lengthConverter
 },
 
 {
-category:"Converter",
-name:"Weight",
-description:"Weight conversion",
-fields:[
-"value",
-"weightFrom",
-"weightTo"
-],
-calculate:v=>
-v.value*
-weightUnits[v.weightFrom]/
-weightUnits[v.weightTo]
+    category:"Converter",
+    name:"Weight",
+    description:"Weight conversion",
+    fields:[
+        "value",
+        "weightFrom",
+        "weightTo"
+    ],
+    calculate:weightConverter
 },
 
 {
-category:"Converter",
-name:"Data Storage",
-description:"Byte / KB / MB / GB / TB",
-fields:[
-"value",
-"dataFrom",
-"dataTo"
-],
-calculate:v=>
-v.value*
-dataUnits[v.dataFrom]/
-dataUnits[v.dataTo]
+    category:"Converter",
+    name:"Data Storage",
+    description:"Byte, KB, MB, GB, TB conversion",
+    fields:[
+        "value",
+        "dataFrom",
+        "dataTo"
+    ],
+    calculate:dataConverter
 },
 
 
 /* HEALTH */
 
 {
-category:"Health",
-name:"BMI Calculator",
-description:"General BMI estimate",
-fields:[
-"weight",
-"height"
-],
-calculate:v=>{
-
-if(v.height<=0)
-return "Invalid height";
-
-const h=v.height/100;
-
-return{
-"BMI":
-v.weight/(h*h)
-};
-
-}
+    category:"Health",
+    name:"BMI Calculator",
+    description:"General BMI estimate",
+    fields:["weight","height"],
+    calculate:bmiCalculator
 },
 
 {
-category:"Health",
-name:"BMR Calculator",
-description:"General BMR estimate",
-fields:[
-"weight",
-"height",
-"age",
-"sex"
-],
-calculate:v=>{
-
-if(v.sex==="male"){
-
-return 10*v.weight+
-6.25*v.height-
-5*v.age+
-5;
-
-}
-
-return 10*v.weight+
-6.25*v.height-
-5*v.age-
-161;
-
-}
+    category:"Health",
+    name:"BMR Calculator",
+    description:"General BMR estimate",
+    fields:[
+        "weight",
+        "height",
+        "age",
+        "sex"
+    ],
+    calculate:bmrCalculator
 },
 
 
 /* GEOMETRY */
 
 {
-category:"Geometry",
-name:"Circle",
-description:"Circle area और circumference",
-fields:["radius"],
-calculate:v=>{
+    category:"Geometry",
+    name:"Circle",
+    description:"Circle area और circumference",
+    fields:["radius"],
+    calculate:v => {
 
-return{
+        return {
+            "Area":
+                Math.PI*v.radius*v.radius,
 
-"Area":
-Math.PI*v.radius*v.radius,
-
-"Circumference":
-2*Math.PI*v.radius
-
-};
-
-}
+            "Circumference":
+                2*Math.PI*v.radius
+        };
+    }
 },
 
 {
-category:"Geometry",
-name:"Rectangle",
-description:"Rectangle area और perimeter",
-fields:[
-"length",
-"width"
-],
-calculate:v=>{
+    category:"Geometry",
+    name:"Rectangle",
+    description:"Rectangle area और perimeter",
+    fields:["length","width"],
+    calculate:v => {
 
-return{
+        return {
+            "Area":
+                v.length*v.width,
 
-"Area":
-v.length*v.width,
-
-"Perimeter":
-2*(v.length+v.width)
-
-};
-
-}
+            "Perimeter":
+                2*(v.length+v.width)
+        };
+    }
 },
 
 {
-category:"Geometry",
-name:"Triangle",
-description:"Triangle area",
-fields:[
-"base",
-"height"
-],
-calculate:v=>
-v.base*v.height/2
+    category:"Geometry",
+    name:"Triangle",
+    description:"Triangle area",
+    fields:["base","height"],
+    calculate:v =>
+        v.base*v.height/2
 },
 
 
 /* STATISTICS */
 
 {
-category:"Statistics",
-name:"Statistics",
-description:"Mean, median, min, max",
-fields:["list"],
-calculate:v=>{
-
-const n=parseNumbers(v.list);
-
-if(!n.length)
-return "Invalid numbers";
-
-const sorted=[...n].sort(
-(a,b)=>a-b
-);
-
-const mean=
-n.reduce((a,b)=>a+b,0)/n.length;
-
-const middle=
-Math.floor(sorted.length/2);
-
-const median=
-sorted.length%2
-?sorted[middle]
-:(sorted[middle-1]+sorted[middle])/2;
-
-return{
-
-"Mean":mean,
-"Median":median,
-"Minimum":Math.min(...n),
-"Maximum":Math.max(...n)
-
-};
-
-}
+    category:"Statistics",
+    name:"Statistics",
+    description:"Mean, median, minimum, maximum और SD",
+    fields:["list"],
+    calculate:statistics
 },
 
 
 /* NUMBER TOOLS */
 
 {
-category:"Number Tools",
-name:"Prime Checker",
-description:"Check number prime है या नहीं",
-fields:["number"],
-calculate:v=>{
-
-const n=Math.floor(v.number);
-
-if(n<2)
-return "Not Prime";
-
-for(
-let i=2;
-i<=Math.sqrt(n);
-i++
-){
-
-if(n%i===0)
-return "Not Prime";
-
-}
-
-return "Prime";
-
-}
+    category:"Number Tools",
+    name:"Prime Checker",
+    description:"Check करें number prime है या नहीं",
+    fields:["number"],
+    calculate:primeChecker
 },
 
 {
-category:"Number Tools",
-name:"GCD",
-description:"Greatest Common Divisor",
-fields:["a","b"],
-calculate:v=>{
-
-let a=Math.abs(
-Math.floor(v.a)
-);
-
-let b=Math.abs(
-Math.floor(v.b)
-);
-
-while(b){
-
-[a,b]=[
-b,
-a%b
-];
-
-}
-
-return a;
-
-}
+    category:"Number Tools",
+    name:"GCD",
+    description:"Greatest Common Divisor",
+    fields:["a","b"],
+    calculate:gcd
 },
 
 {
-category:"Number Tools",
-name:"LCM",
-description:"Least Common Multiple",
-fields:["a","b"],
-calculate:v=>{
-
-const a=Math.abs(
-Math.floor(v.a)
-);
-
-const b=Math.abs(
-Math.floor(v.b)
-);
-
-if(a===0||b===0)
-return 0;
-
-let x=a;
-let y=b;
-
-while(y){
-
-[x,y]=[
-y,
-x%y
-];
-
-}
-
-return a/x*b;
-
-}
+    category:"Number Tools",
+    name:"LCM",
+    description:"Least Common Multiple",
+    fields:["a","b"],
+    calculate:lcm
 },
 
 
 /* DIGITAL */
 
 {
-category:"Digital",
-name:"Download Time",
-description:"File size और internet speed",
-fields:[
-"fileSize",
-"speed"
-],
-calculate:v=>{
-
-if(v.speed<=0)
-return "Invalid speed";
-
-return{
-"Seconds":
-v.fileSize*8/v.speed,
-
-"Minutes":
-v.fileSize*8/v.speed/60
-
-};
-
-}
+    category:"Digital",
+    name:"Download Time",
+    description:"File size और internet speed",
+    fields:["fileSize","speed"],
+    calculate:v =>
+        v.speed <= 0
+        ? "Invalid speed"
+        : (v.fileSize*8/v.speed).toFixed(2)
+          + " seconds"
 }
 
 ];
 
 
-/* =========================
-   UNITS
-========================= */
+/* ==========================================
+   LABELS
+========================================== */
 
-const lengthUnits={
+const labels = {
+
+a:"Number A",
+b:"Number B",
+
+list:"Numbers (comma separated)",
+
+expression:"Expression",
+
+monthly:"Monthly Investment",
+
+years:"Years",
+
+rate:"Annual Rate (%)",
+
+principal:"Principal Amount",
+
+frequency:"Compounding / Year",
+
+months:"Loan Tenure (Months)",
+
+startValue:"Start Value",
+
+endValue:"End Value",
+
+price:"Price",
+
+cost:"Cost Price",
+
+selling:"Selling Price",
+
+amount:"Amount",
+
+bill:"Bill Amount",
+
+people:"Number of People",
+
+birthDate:"Birth Date",
+
+startDate:"Start Date",
+
+endDate:"End Date",
+
+value:"Value",
+
+temperatureFrom:"From",
+
+temperatureTo:"To",
+
+lengthFrom:"From",
+
+lengthTo:"To",
+
+weightFrom:"From",
+
+weightTo:"To",
+
+dataFrom:"From",
+
+dataTo:"To",
+
+weight:"Weight (kg)",
+
+height:"Height (cm)",
+
+age:"Age",
+
+sex:"Sex",
+
+radius:"Radius",
+
+length:"Length",
+
+width:"Width",
+
+base:"Base",
+
+number:"Integer",
+
+fileSize:"File Size (MB)",
+
+speed:"Speed (Mbps)"
+
+};
+
+
+/* ==========================================
+   UNIT DATABASE
+========================================== */
+
+const lengthUnits = {
 
 mm:0.001,
 cm:0.01,
@@ -1596,7 +1079,7 @@ mile:1609.344
 
 };
 
-const weightUnits={
+const weightUnits = {
 
 gram:0.001,
 kg:1,
@@ -1605,7 +1088,7 @@ ounce:0.0283495
 
 };
 
-const dataUnits={
+const dataUnits = {
 
 byte:1,
 KB:1024,
@@ -1616,11 +1099,1478 @@ TB:1024**4
 };
 
 
-/* =========================
-   LABELS
-========================= */
+/* ==========================================
+   CATEGORIES
+========================================== */
 
-const labels={
+function createCategories(){
 
-a:"Number A",
-b:"Num
+    const categories = [
+        "All",
+        ...new Set(
+            calculators.map(c=>c.category)
+        )
+    ];
+
+    document.getElementById(
+        "categories"
+    ).innerHTML =
+        categories.map(c => `
+
+        <button
+            class="category ${
+                c==="All" ? "active" : ""
+            }"
+            onclick="selectCategory(this,'${c}')">
+
+            ${c}
+
+        </button>
+
+        `).join("");
+}
+
+
+/* ==========================================
+   RENDER CALCULATORS
+========================================== */
+
+function renderCalculators(){
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const filtered =
+        calculators.filter(c => {
+
+            const categoryMatch =
+                currentCategory==="All" ||
+                c.category===currentCategory;
+
+            const searchMatch =
+                `${c.name} ${c.category} ${c.description}`
+                .toLowerCase()
+                .includes(search);
+
+            return categoryMatch &&
+                   searchMatch;
+        });
+
+    const grid =
+        document.getElementById(
+            "calculatorGrid"
+        );
+
+    if(!filtered.length){
+
+        grid.innerHTML = `
+            <div class="empty">
+                कोई calculator नहीं मिला.
+            </div>
+        `;
+
+        return;
+    }
+
+    grid.innerHTML =
+        filtered
+        .map(createCard)
+        .join("");
+}
+
+
+/* ==========================================
+   CREATE CARD
+========================================== */
+
+function createCard(calc){
+
+    return `
+
+    <article
+        class="calculator-card"
+        data-name="${calc.name}">
+
+        <div class="tag">
+            ${calc.category}
+        </div>
+
+        <h2>
+            ${calc.name}
+        </h2>
+
+        <div class="description">
+            ${calc.description}
+        </div>
+
+        <div class="fields">
+
+            ${calc.fields
+                .map(fieldHTML)
+                .join("")}
+
+        </div>
+
+        <div class="actions">
+
+            <button
+                class="btn primary"
+                onclick="runCalculator(this)">
+
+                Calculate
+
+            </button>
+
+            <button
+                class="btn"
+                onclick="resetCalculator(this)">
+
+                Reset
+
+            </button>
+
+        </div>
+
+        <div class="result">
+
+            <span class="muted">
+                Result will appear here.
+            </span>
+
+        </div>
+
+    </article>
+
+    `;
+}
+
+
+/* ==========================================
+   FIELD GENERATOR
+========================================== */
+
+function fieldHTML(field){
+
+    if(field==="sex"){
+
+        return `
+        <label>
+            Sex
+
+            <select data-field="sex">
+
+                <option value="male">
+                    Male
+                </option>
+
+                <option value="female">
+                    Female
+                </option>
+
+            </select>
+
+        </label>
+        `;
+    }
+
+
+    if(
+        field==="temperatureFrom" ||
+        field==="temperatureTo"
+    ){
+
+        const units=[
+            ["C","Celsius"],
+            ["F","Fahrenheit"],
+            ["K","Kelvin"]
+        ];
+
+        return `
+        <label>
+
+            ${labels[field]}
+
+            <select data-field="${field}">
+
+                ${units.map(u =>
+                    `<option value="${u[0]}">
+                        ${u[1]}
+                    </option>`
+                ).join("")}
+
+            </select>
+
+        </label>
+        `;
+    }
+
+
+    if(
+        field==="lengthFrom" ||
+        field==="lengthTo"
+    ){
+
+        const units=[
+            ["mm","Millimeter"],
+            ["cm","Centimeter"],
+            ["meter","Meter"],
+            ["km","Kilometer"],
+            ["inch","Inch"],
+            ["feet","Feet"],
+            ["yard","Yard"],
+            ["mile","Mile"]
+        ];
+
+        return `
+        <label>
+
+            ${labels[field]}
+
+            <select data-field="${field}">
+
+                ${units.map(u =>
+                    `<option value="${u[0]}">
+                        ${u[1]}
+                    </option>`
+                ).join("")}
+
+            </select>
+
+        </label>
+        `;
+    }
+
+
+    if(
+        field==="weightFrom" ||
+        field==="weightTo"
+    ){
+
+        const units=[
+            ["gram","Gram"],
+            ["kg","Kilogram"],
+            ["pound","Pound"],
+            ["ounce","Ounce"]
+        ];
+
+        return `
+        <label>
+
+            ${labels[field]}
+
+            <select data-field="${field}">
+
+                ${units.map(u =>
+                    `<option value="${u[0]}">
+                        ${u[1]}
+                    </option>`
+                ).join("")}
+
+            </select>
+
+        </label>
+        `;
+    }
+
+
+    if(
+        field==="dataFrom" ||
+        field==="dataTo"
+    ){
+
+        const units=[
+            ["byte","Byte"],
+            ["KB","KB"],
+            ["MB","MB"],
+            ["GB","GB"],
+            ["TB","TB"]
+        ];
+
+        return `
+        <label>
+
+            ${labels[field]}
+
+            <select data-field="${field}">
+
+                ${units.map(u =>
+                    `<option value="${u[0]}">
+                        ${u[1]}
+                    </option>`
+                ).join("")}
+
+            </select>
+
+        </label>
+        `;
+    }
+
+
+    const type =
+        field==="birthDate" ||
+        field==="startDate" ||
+        field==="endDate"
+        ? "date"
+        : field==="expression" ||
+          field==="list"
+        ? "text"
+        : "number";
+
+    return `
+
+    <label>
+
+        ${labels[field] || field}
+
+        <input
+            type="${type}"
+            data-field="${field}"
+            placeholder="${labels[field] || field}"
+            ${type==="number" ? 'step="any"' : ""}
+        >
+
+    </label>
+
+    `;
+}
+
+
+/* ==========================================
+   RUN CALCULATOR
+========================================== */
+
+function runCalculator(button){
+
+    const card =
+        button.closest(".calculator-card");
+
+    const name =
+        card.dataset.name;
+
+    const calc =
+        calculators.find(
+            c=>c.name===name
+        );
+
+    if(!calc)
+        return;
+
+    const values = {};
+
+    let invalid = false;
+
+    calc.fields.forEach(field => {
+
+        const element =
+            card.querySelector(
+                `[data-field="${field}"]`
+            );
+
+        if(!element)
+            return;
+
+        if(element.type==="number"){
+
+            const value =
+                parseFloat(element.value);
+
+            if(!Number.isFinite(value)){
+                invalid = true;
+            }else{
+                values[field]=value;
+            }
+
+        }else{
+
+            values[field]=element.value;
+
+            if(
+                element.value.trim()==="" &&
+                field!=="sex"
+            ){
+                invalid=true;
+            }
+        }
+    });
+
+
+    const result =
+        card.querySelector(".result");
+
+
+    if(invalid){
+
+        result.innerHTML = `
+            <span class="error">
+                Please enter valid values.
+            </span>
+        `;
+
+        return;
+    }
+
+
+    try{
+
+        const output =
+            calc.calculate(values);
+
+        result.innerHTML =
+            formatResult(output);
+
+        addHistory(
+            calc.name,
+            output
+        );
+
+    }catch(error){
+
+        result.innerHTML = `
+            <span class="error">
+                Calculation error.
+            </span>
+        `;
+
+        console.error(error);
+    }
+}
+
+
+/* ==========================================
+   FORMAT RESULT
+========================================== */
+
+function formatResult(output){
+
+    if(
+        output !== null &&
+        typeof output === "object"
+    ){
+
+        return Object.entries(output)
+            .map(([key,value]) =>
+                `<div>
+                    <b>${key}:</b>
+                    ${formatNumber(value)}
+                </div>`
+            )
+            .join("");
+    }
+
+    return `
+        <b>${formatNumber(output)}</b>
+    `;
+}
+
+
+/* ==========================================
+   NUMBER FORMAT
+========================================== */
+
+function formatNumber(value){
+
+    if(typeof value === "number"){
+
+        if(!Number.isFinite(value))
+            return "Invalid result";
+
+        return value.toLocaleString(
+            "en-IN",
+            {
+                maximumFractionDigits:2
+            }
+        );
+    }
+
+    return String(value);
+}
+
+
+/* ==========================================
+   RESET
+========================================== */
+
+function resetCalculator(button){
+
+    const card =
+        button.closest(".calculator-card");
+
+    card.querySelectorAll(
+        "input"
+    ).forEach(input => {
+
+        input.value="";
+
+    });
+
+    card.querySelectorAll(
+        "select"
+    ).forEach(select => {
+
+        select.selectedIndex=0;
+
+    });
+
+    card.querySelector(".result").innerHTML =
+        `<span class="muted">
+            Result will appear here.
+        </span>`;
+}
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+function searchCalculators(){
+
+    renderCalculators();
+
+}
+
+function clearSearch(){
+
+    document.getElementById(
+        "searchInput"
+    ).value="";
+
+    renderCalculators();
+
+}
+
+
+/* ==========================================
+   CATEGORY
+========================================== */
+
+function selectCategory(button,category){
+
+    currentCategory=category;
+
+    document
+        .querySelectorAll(".category")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    button.classList.add("active");
+
+    renderCalculators();
+}
+
+
+/* ==========================================
+   HISTORY
+========================================== */
+
+function addHistory(name,result){
+
+    history.unshift({
+
+        name:name,
+
+        result:
+            typeof result==="object"
+            ? JSON.stringify(result)
+            : String(result),
+
+        time:new Date().toLocaleString(
+            "en-IN"
+        )
+
+    });
+
+    history =
+        history.slice(0,20);
+
+    localStorage.setItem(
+        "calculatorHistory",
+        JSON.stringify(history)
+    );
+
+    renderHistory();
+}
+
+
+function renderHistory(){
+
+    const list =
+        document.getElementById(
+            "historyList"
+        );
+
+    if(!history.length){
+
+        list.innerHTML =
+            `<div class="history-item muted">
+                अभी कोई calculation history नहीं है.
+            </div>`;
+
+        return;
+    }
+
+    list.innerHTML =
+        history.map(item => `
+
+        <div class="history-item">
+
+            <b>${escapeHTML(item.name)}</b>
+
+            <div class="muted">
+                ${escapeHTML(item.result)}
+            </div>
+
+            <small class="muted">
+                ${escapeHTML(item.time)}
+            </small>
+
+        </div>
+
+        `).join("");
+}
+
+
+function clearHistory(){
+
+    history=[];
+
+    localStorage.removeItem(
+        "calculatorHistory"
+    );
+
+    renderHistory();
+}
+
+
+function scrollHistory(){
+
+    document
+        .getElementById("historySection")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+/* ==========================================
+   DARK / LIGHT THEME
+========================================== */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("light");
+
+    const isLight =
+        document.body.classList.contains(
+            "light"
+        );
+
+    localStorage.setItem(
+        "calculatorTheme",
+        isLight ? "light" : "dark"
+    );
+
+    updateThemeButton();
+}
+
+
+function updateThemeButton(){
+
+    const button =
+        document.getElementById(
+            "themeBtn"
+        );
+
+    const isLight =
+        document.body.classList.contains(
+            "light"
+        );
+
+    button.textContent =
+        isLight
+        ? "🌙 Dark"
+        : "☀️ Light";
+}
+
+
+function loadTheme(){
+
+    const saved =
+        localStorage.getItem(
+            "calculatorTheme"
+        );
+
+    if(saved==="light"){
+
+        document.body.classList.add(
+            "light"
+        );
+    }
+
+    updateThemeButton();
+}
+
+
+/* ==========================================
+   BASIC HELPERS
+========================================== */
+
+function parseNumbers(text){
+
+    return String(text)
+        .split(",")
+        .map(x=>parseFloat(x.trim()))
+        .filter(Number.isFinite);
+}
+
+
+/* ==========================================
+   SCIENTIFIC
+========================================== */
+
+function calculateExpression(expression){
+
+    let exp =
+        String(expression)
+        .replace(/\^/g,"**")
+        .trim();
+
+    if(!exp)
+        return "Enter expression";
+
+    /*
+       केवल calculator-safe characters allow करें.
+    */
+
+    if(!/^[0-9+\-*/().%\s*]+$/.test(exp)){
+
+        return "Use only numbers and + - * / ( ) % ^";
+    }
+
+    try{
+
+        const result =
+            Function(
+                `"use strict"; return (${exp})`
+            )();
+
+        if(!Number.isFinite(result))
+            return "Invalid expression";
+
+        return result;
+
+    }catch{
+
+        return "Invalid expression";
+    }
+}
+
+
+/* ==========================================
+   SIP
+========================================== */
+
+function sipCalculator(v){
+
+    const P=v.monthly;
+    const n=v.years*12;
+    const r=v.rate/100/12;
+
+    if(P<0 || n<=0 || r<0)
+        return "Invalid values";
+
+    let futureValue;
+
+    if(r===0){
+
+        futureValue=P*n;
+
+    }else{
+
+        futureValue =
+            P *
+            (
+                (Math.pow(1+r,n)-1)/r
+            ) *
+            (1+r);
+    }
+
+    const invested=P*n;
+
+    return {
+
+        "Invested Amount":invested,
+
+        "Estimated Value":futureValue,
+
+        "Estimated Gain":
+            futureValue-invested
+    };
+}
+
+
+/* ==========================================
+   LUMP SUM
+========================================== */
+
+function lumpSum(v){
+
+    if(v.principal<0 ||
+       v.years<0 ||
+       v.rate<0)
+        return "Invalid values";
+
+    const value =
+        v.principal *
+        Math.pow(
+            1+v.rate/100,
+            v.years
+        );
+
+    return {
+
+        "Invested Amount":v.principal,
+
+        "Estimated Value":value,
+
+        "Estimated Gain":
+            value-v.principal
+    };
+}
+
+
+/* ==========================================
+   FD
+========================================== */
+
+function fdCalculator(v){
+
+    if(
+        v.principal<0 ||
+        v.rate<0 ||
+        v.years<0 ||
+        v.frequency<=0
+    )
+        return "Invalid values";
+
+    const n =
+        v.frequency * v.years;
+
+    const value =
+        v.principal *
+        Math.pow(
+            1+v.rate/100/v.frequency,
+            n
+        );
+
+    return {
+
+        "Principal":v.principal,
+
+        "Interest":value-v.principal,
+
+        "Maturity Amount":value
+    };
+}
+
+
+/* ==========================================
+   RD
+========================================== */
+
+function rdCalculator(v){
+
+    if(
+        v.monthly<0 ||
+        v.rate<0 ||
+        v.years<=0
+    )
+        return "Invalid values";
+
+    const months =
+        v.years*12;
+
+    const monthlyRate =
+        v.rate/100/12;
+
+    let maturity;
+
+    if(monthlyRate===0){
+
+        maturity =
+            v.monthly*months;
+
+    }else{
+
+        maturity =
+            v.monthly *
+            (
+                (Math.pow(
+                    1+monthlyRate,
+                    months
+                )-1) /
+                monthlyRate
+            ) *
+            (1+monthlyRate);
+    }
+
+    const invested =
+        v.monthly*months;
+
+    return {
+
+        "Deposited":invested,
+
+        "Estimated Interest":
+            maturity-invested,
+
+        "Maturity Amount":
+            maturity
+    };
+}
+
+
+/* ==========================================
+   EMI
+========================================== */
+
+function emiCalculator(v){
+
+    if(
+        v.principal<=0 ||
+        v.months<=0 ||
+        v.rate<0
+    )
+        return "Invalid values";
+
+    const r =
+        v.rate/100/12;
+
+    let emi;
+
+    if(r===0){
+
+        emi =
+            v.principal/v.months;
+
+    }else{
+
+        emi =
+            v.principal *
+            r *
+            Math.pow(1+r,v.months) /
+            (
+                Math.pow(1+r,v.months)-1
+            );
+    }
+
+    const total =
+        emi*v.months;
+
+    return {
+
+        "Monthly EMI":emi,
+
+        "Total Payment":total,
+
+        "Total Interest":
+            total-v.principal
+    };
+}
+
+
+/* ==========================================
+   SIMPLE INTEREST
+========================================== */
+
+function simpleInterest(v){
+
+    if(
+        v.principal<0 ||
+        v.rate<0 ||
+        v.years<0
+    )
+        return "Invalid values";
+
+    const interest =
+        v.principal*
+        v.rate*
+        v.years/100;
+
+    return {
+
+        "Interest":interest,
+
+        "Total Amount":
+            v.principal+interest
+    };
+}
+
+
+/* ==========================================
+   COMPOUND INTEREST
+========================================== */
+
+function compoundInterest(v){
+
+    if(
+        v.principal<0 ||
+        v.rate<0 ||
+        v.years<0 ||
+        v.frequency<=0
+    )
+        return "Invalid values";
+
+    const amount =
+        v.principal *
+        Math.pow(
+            1+v.rate/100/v.frequency,
+            v.frequency*v.years
+        );
+
+    return {
+
+        "Principal":v.principal,
+
+        "Compound Interest":
+            amount-v.principal,
+
+        "Total Amount":amount
+    };
+}
+
+
+/* ==========================================
+   CAGR
+========================================== */
+
+function cagr(v){
+
+    if(
+        v.startValue<=0 ||
+        v.endValue<=0 ||
+        v.years<=0
+    )
+        return "Invalid values";
+
+    const result =
+        (
+            Math.pow(
+                v.endValue/v.startValue,
+                1/v.years
+            )-1
+        )*100;
+
+    return result.toFixed(2)+" %";
+}
+
+
+/* ==========================================
+   DISCOUNT
+========================================== */
+
+function discount(v){
+
+    if(
+        v.price<0 ||
+        v.rate<0
+    )
+        return "Invalid values";
+
+    const discountAmount =
+        v.price*v.rate/100;
+
+    return {
+
+        "Discount":discountAmount,
+
+        "Final Price":
+            v.price-discountAmount
+    };
+}
+
+
+/* ==========================================
+   PROFIT LOSS
+========================================== */
+
+function profitLoss(v){
+
+    const difference =
+        v.selling-v.cost;
+
+    if(v.cost<=0)
+        return "Invalid cost price";
+
+    const percentage =
+        difference/v.cost*100;
+
+    return {
+
+        "Profit / Loss":
+            difference,
+
+        "Percentage":
+            percentage.toFixed(2)+" %"
+    };
+}
+
+
+/* ==========================================
+   AGE
+========================================== */
+
+function ageCalculator(v){
+
+    const birth =
+        new Date(v.birthDate);
+
+    const today =
+        new Date();
+
+    if(isNaN(birth.getTime()))
+        return "Invalid date";
+
+    if(birth>today)
+        return "Birth date cannot be future";
+
+    let years =
+        today.getFullYear() -
+        birth.getFullYear();
+
+    const month =
+        today.getMonth() -
+        birth.getMonth();
+
+    if(
+        month<0 ||
+        (
+            month===0 &&
+            today.getDate()<birth.getDate()
+        )
+    ){
+
+        years--;
+    }
+
+    return years+" years";
+}
+
+
+/* ==========================================
+   TEMPERATURE
+========================================== */
+
+function temperature(v){
+
+    let celsius;
+
+    if(v.temperatureFrom==="C")
+        celsius=v.value;
+
+    if(v.temperatureFrom==="F")
+        celsius=(v.value-32)*5/9;
+
+    if(v.temperatureFrom==="K")
+        celsius=v.value-273.15;
+
+    let result;
+
+    if(v.temperatureTo==="C")
+        result=celsius;
+
+    if(v.temperatureTo==="F")
+        result=celsius*9/5+32;
+
+    if(v.temperatureTo==="K")
+        result=celsius+273.15;
+
+    return result;
+}
+
+
+/* ==========================================
+   LENGTH
+========================================== */
+
+function lengthConverter(v){
+
+    const meters =
+        v.value *
+        lengthUnits[v.lengthFrom];
+
+    return meters /
+        lengthUnits[v.lengthTo];
+}
+
+
+/* ==========================================
+   WEIGHT
+========================================== */
+
+function weightConverter(v){
+
+    const kg =
+        v.value *
+        weightUnits[v.weightFrom];
+
+    return kg /
+        weightUnits[v.weightTo];
+}
+
+
+/* ==========================================
+   DATA
+========================================== */
+
+function dataConverter(v){
+
+    const bytes =
+        v.value *
+        dataUnits[v.dataFrom];
+
+    return bytes /
+        dataUnits[v.dataTo];
+}
+
+
+/* ==========================================
+   BMI
+========================================== */
+
+function bmiCalculator(v){
+
+    if(
+        v.weight<=0 ||
+        v.height<=0
+    )
+        return "Invalid values";
+
+    const meters =
+        v.height/100;
+
+    const bmi =
+        v.weight/
+        (meters*meters);
+
+    return bmi.toFixed(2);
+}
+
+
+/* ==========================================
+   BMR
+========================================== */
+
+function bmrCalculator(v){
+
+    if(
+        v.weight<=0 ||
+        v.height<=0 ||
+        v.age<=0
+    )
+        return "Invalid values";
+
+    let bmr;
+
+    if(v.sex==="male"){
+
+        bmr =
+            10*v.weight +
+            6.25*v.height -
+            5*v.age +
+            5;
+
+    }else{
+
+        bmr =
+            10*v.weight +
+            6.25*v.height -
+            5*v.age -
+            161;
+    }
+
+    return Math.round(bmr)+" kcal/day";
+}
+
+
+/* ==========================================
+   STATISTICS
+========================================== */
+
+function statistics(v){
+
+    const nums =
+        parseNumbers(v.list);
+
+    if(!nums.length)
+        return "Invalid numbers";
+
+    const sorted =
+        [...nums].sort((a,b)=>a-b);
+
+    const mean =
+        nums.reduce(
+            (a,b)=>a+b,
+            0
+        )/nums.length;
+
+    const middle =
+        Math.floor(sorted.length/2);
+
+    const median =
+        sorted.length%2
+        ? sorted[middle]
+        : (
+            sorted[middle-1]+
+            sorted[middle]
+        )/2;
+
+    const variance =
+        nums.reduce(
+            (sum,x)=>
+                sum+Math.pow(x-mean,2),
+            0
+        )/nums.length;
+
+    return {
+
+        "Mean":mean,
+
+        "Median":median,
+
+        "Minimum":Math.min(...nums),
+
+        "Maximum":Math.max(...nums),
+
+        "Standard Deviation":
+            Math.sqrt(variance)
+    };
+}
+
+
+/* ==========================================
+   PRIME
+========================================== */
+
+function primeChecker(v){
+
+    const n =
+        Math.floor(v.number);
+
+    if(n<2)
+        return "Not Prime";
+
+    if(n===2)
+        return "Prime";
+
+    if(n%2===0)
+        return "Not Prime";
+
+    for(
+        let i=3;
+        i<=Math.sqrt(n);
+        i+=2
+    ){
+
+        if(n%i===0)
+            return "Not Prime";
+    }
+
+    return "Prime";
+}
+
+
+/* ==========================================
+   GCD
+========================================== */
+
+function gcd(v){
+
+    let a =
+        Math.abs(
+            Math.trunc(v.a)
+        );
+
+    let b =
+        Math.abs(
+            Math.trunc(v.b)
+        );
+
+    while(b!==0){
+
+        const temp=b;
+
+        b=a%b;
+
+        a=temp;
+    }
+
+    return a;
+}
+
+
+/* ==========================================
+   LCM
+========================================== */
+
+function lcm(v){
+
+    const a =
+        Math.trunc(v.a);
+
+    const b =
+        Math.trunc(v.b);
+
+    if(a===0 || b===0)
+        return 0;
+
+    const divisor =
+        gcd({
+            a:a,
+            b:b
+        });
+
+    return Math.abs(
+        a*b/divisor
+    );
+}
+
+
+/* ==========================================
+   INITIALIZE
+========================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadTheme();
+
+        createCategories();
+
+        renderCalculators();
+
+        renderHistory();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
